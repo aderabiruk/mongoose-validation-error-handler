@@ -1,0 +1,30 @@
+{
+  "name": "mongoose-validation-error-handler",
+  "version": "1.0.0",
+  "description": "Mongoose Validation Error Handler",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "lint": "eslint src test",
+    "test": "jest --"
+  },
+  "keywords": [
+    "Mongoose",
+    "Validation",
+    "Error",
+    "Handler"
+  ],
+  "author": "Biruk Adera",
+  "license": "ISC",
+  "jest": {
+    "verbose": true
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "eslint": "^6.4.0",
+    "jest": "^24.9.0",
+    "mongoose": "^5.7.1"
+  }
+}
