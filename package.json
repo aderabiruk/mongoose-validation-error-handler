@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel src --out-dir dist",
     "lint": "eslint src test",
-    "test": "jest --"
+    "test": "jest --watchAll --verbose"
   },
   "keywords": [
     "Mongoose",
@@ -25,6 +25,8 @@
     "@babel/preset-env": "^7.6.0",
     "eslint": "^6.4.0",
     "jest": "^24.9.0",
-    "mongoose": "^5.7.1"
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.1",
+    "regenerator-runtime": "^0.13.3"
   }
 }
