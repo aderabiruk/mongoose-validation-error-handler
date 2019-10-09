@@ -14,6 +14,11 @@ const mongoose_error_kinds = {
     REQUIRED: "required"
 };
 
+/**
+ * 
+ * @param {*} error 
+ * @param {Object} options 
+ */
 let transform_mongoose_error = (error, options) => {
     let { capitalize_option, humanize_option } = parse_options(options);
         let error_messages = [];
@@ -28,8 +33,21 @@ let transform_mongoose_error = (error, options) => {
             });
         } 
         return error_messages;
-}
+};
 
+/**
+ * Returns an Error Message Object
+ * 
+ * Error Message Object Definition: {field: attribute_name, message: 'customized error message' }
+ * 
+ * @param {String} kind Mongoose Validation Error Kind
+ * @param {String} name Name
+ * @param {String} value Value
+ * @param {String} message Default Message
+ * @param {Boolean} capitalize_option Capitalize Name
+ * @param {Boolean} humanize_option Humanize Name
+ * @returns {Object} Error Message Object
+ */
 let process_error = (kind, name, value, message, capitalize_option, humanize_option) => {
     let error = { field: name, message: "" };
     name = capitalize_option ? capitalize(name) : name;
@@ -76,46 +94,101 @@ let process_error = (kind, name, value, message, capitalize_option, humanize_opt
     return error;
 };
 
+/**
+ * Returns Boolean Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let boolean_message = (attribute) => {
     return `'${attribute}' must be a boolean.`;
 };
 
+/**
+ * Returns Buffer Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let buffer_message = (attribute) => {
     return `'${attribute}' must be a buffer.`;
 };
 
+/**
+ * Returns Date Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let date_message = (attribute) => {
     return `'${attribute}' must be a date.`;
 };
 
+/**
+ * Returns Enum Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let enum_message = (attribute, value) => {
     return `'${value}' is an invalid value for the attribute '${attribute}'.`;
-}
+};
 
+/**
+ * Returns Maxlength Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let maxlength_message = (attribute) => {
     return `'${attribute}' is longer than the maximum allowed length.`;
 };
 
+/**
+ * Returns Max Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let max_message = (attribute, value) => {
     return value instanceof Date ? `'${attribute}' is after the maximum allowed date.` : `'${attribute}' is greater than the maximum allowed value.`;
 };
 
+/**
+ * Returns Minlength Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let minlength_message = (attribute) => {
     return `'${attribute}' is shorter than the minimum allowed length.`;
 };
 
+/**
+ * Returns Min Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let min_message = (attribute, value) => {
     return value instanceof Date ? `'${attribute}' is before the minimum allowed date.` : `'${attribute}' is less than the minimum allowed value.`;  
 };
 
+/**
+ * Returns Number Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let number_message = (attribute) => {
     return `'${attribute}' must be a number.`;
 };
 
+/**
+ * Returns ObjectId Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let object_id_message = (attribute) => {
     return `'${attribute}' must be an ObjectId.`;
 };
 
+/**
+ * Returns Required Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ */
 let required_message = (attribute) => {
     return `'${attribute}' is Required.`;
 };
