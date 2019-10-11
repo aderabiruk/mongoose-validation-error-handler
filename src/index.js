@@ -193,4 +193,4 @@ let required_message = (attribute) => {
     return `'${attribute}' is Required.`;
 };
 
-export default transform_mongoose_error;
+module.exports = transform_mongoose_error;

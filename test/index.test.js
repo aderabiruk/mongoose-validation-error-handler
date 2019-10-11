@@ -10,7 +10,6 @@ import transform_mongoose_error from '../src/index';
 import { capitalize, humanize, parse_options } from '../src/utils';
 import UserDefinedValidationModel from './UserDefinedValidationModel';
 
-
 describe("MongooseValidationErrorHandler", () => {
 
     describe("capitalize", () => {
