@@ -32,7 +32,7 @@ model.save((error, savedModel) => {
     * The attribute first_name is converted to first name if the humanize option is true.
     
 ### Error Messages
-| Error Kinds | Message |
+| Error Kind | Message |
 |------------------------|---------------|
 | boolean | 'is_active' must be a boolean. |
 | buffer | 'bin_data' must be a buffer. |
