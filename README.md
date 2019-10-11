@@ -31,5 +31,20 @@ model.save((error, savedModel) => {
 2. The humanize options replaces all underscore characters in an attribute name with a white space.
     * The attribute first_name is converted to first name if the humanize option is true.
     
+### Error Messages
+| Error Kinds | Message |
+|------------------------|---------------|
+| boolean | 'is_active' must be a boolean. |
+| buffer | 'bin_data' must be a buffer. |
+| date | 'created_at' must be a date. |
+| enum | 'unknown' is an invalid value for the attribute 'user_type'.|
+| maxlength | 'identifier' is longer than the maximum allowed length. |
+| max | 'fee' is greater than the maximum allowed value. |
+| minlength | 'identifier' is shorter than the minimum allowed length. |
+| min | 'fee' is less than the minimum allowed value. |
+| number | 'age' must be a number. |
+| ObjectId | 'user_id' must be an ObjectId |
+| required | 'first_name' is Required. |
+
 ## License
 MIT ©  aderabiruk
