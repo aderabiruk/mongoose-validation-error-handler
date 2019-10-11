@@ -9,10 +9,16 @@
     "test": "jest --watchAll --verbose"
   },
   "keywords": [
-    "Mongoose",
-    "Validation",
-    "Error",
-    "Handler"
+    "mongo",
+    "mongodb",
+    "mongoose",
+    "error",
+    "handler",
+    "handling",
+    "messages",
+    "parser",
+    "validation",
+    "transform"
   ],
   "author": "Biruk Adera",
   "license": "ISC",
