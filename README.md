@@ -1,5 +1,5 @@
 # MongooseValidation Error Handler
-mongoose-validation-error-handler is responsilbe for processing and transfroming validation error(s) into a readable format.
+mongoose-validation-error-handler is responsilbe for processing and transfroming mongoose validation error(s) into a readable format.
 
 ## Index
 
