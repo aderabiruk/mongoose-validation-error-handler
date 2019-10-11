@@ -1,5 +1,8 @@
 import { capitalize, humanize, parse_options } from './utils';
 
+/**
+ * Mongoose Error Kinds
+ */
 const mongoose_error_kinds = {
     BOOLEAN: "Boolean",
     BUFFER: "Buffer",
