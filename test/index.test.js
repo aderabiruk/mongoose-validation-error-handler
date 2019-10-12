@@ -6,7 +6,7 @@ import MinMaxModel from "./MinMaxModel";
 import RequiredModel from './RequiredModel';
 import MinMaxLengthModel from './MinMaxLengthModel';
 
-import transform_mongoose_error from '../src/index';
+import transform_mongoose_error from '../dist/index';
 import { capitalize, humanize, parse_options } from '../src/utils';
 import UserDefinedValidationModel from './UserDefinedValidationModel';
 
