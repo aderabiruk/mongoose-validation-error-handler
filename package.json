@@ -2,7 +2,7 @@
   "name": "mongoose-validation-error-handler",
   "version": "1.0.0",
   "description": "Mongoose Validation Error Handler",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
     "lint": "eslint src test",
