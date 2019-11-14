@@ -45,6 +45,7 @@ model.save((error, savedModel) => {
 | number | 'age' must be a number. |
 | ObjectId | 'user_id' must be an ObjectId |
 | required | 'first_name' is Required. |
+| unique | email 'youremail@email.com' already exists. |
 
 ## License
 MIT ©  aderabiruk
