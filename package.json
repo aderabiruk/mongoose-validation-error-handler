@@ -25,6 +25,10 @@
   "jest": {
     "verbose": true
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aderabiruk/mongoose-validation-error-handler.git"
+  },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
