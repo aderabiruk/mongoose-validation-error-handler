@@ -9,7 +9,7 @@ import RequiredModel from './RequiredModel';
 import MinMaxLengthModel from './MinMaxLengthModel';
 import UserDefinedValidationModel from './UserDefinedValidationModel';
 
-import transform_mongoose_error from '../src/index';
+import transform_mongoose_error from '../dist/index';
 import { capitalize, humanize, parse_options } from '../src/utils';
 
 describe("MongooseValidationErrorHandler", () => {
