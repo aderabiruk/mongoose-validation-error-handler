@@ -14,7 +14,8 @@ const mongoose_error_kinds = {
     MINLENGTH: "minlength",
     NUMBER: "Number",
     OBJECTID: "ObjectID",
-    REQUIRED: "required"
+    REQUIRED: "required",
+    UNIQUE: "unique"
 };
 
 /**
@@ -25,9 +26,10 @@ const mongoose_error_kinds = {
 let transform_mongoose_error = (error, options) => {
     let { capitalize_option, humanize_option } = parse_options(options);
         let error_messages = [];
-        let attributes = Object.keys(error.errors);
-
+        
         if (error.name === "ValidationError") {
+            let attributes = Object.keys(error.errors);
+
             attributes.forEach((attribute) => {
                 let kind = error.errors[attribute].kind;
                 let value = error.errors[attribute].value;
@@ -35,6 +37,30 @@ let transform_mongoose_error = (error, options) => {
                 error_messages.push(process_error(kind, attribute, value, message, capitalize_option, humanize_option));
             });
         } 
+        else if (error.name === "MongoError" && (error.code === 11000 || error.code === 11001)) {
+            let message = error.message;
+
+            /**
+             * Extract attribute
+             */
+            let keyRegex = message.match(/index:\s+([^\s]+)/);
+            let rawKey = keyRegex ? keyRegex[1]: '';
+            let attribute = rawKey.substring(0, rawKey.lastIndexOf('_'));
+            
+            /**
+             * Extract value
+             */
+            let valueRegex = message.match(/key:\s+{\s+:\s\"(.*)(?=\")/);
+            let value = valueRegex ? valueRegex[1] : '';
+
+            error_messages.push(process_error(mongoose_error_kinds.UNIQUE, attribute, value, message, capitalize_option, humanize_option));
+        }
+        else if (error.message) {
+            error_messages.push(error.message);
+        }
+        else {
+            error_messages.push(error);
+        }
         return error_messages;
 };
 
@@ -89,6 +115,9 @@ let process_error = (kind, name, value, message, capitalize_option, humanize_opt
             break;
         case mongoose_error_kinds.REQUIRED:
             error.message = required_message(name);
+            break;
+        case mongoose_error_kinds.UNIQUE:
+            error.message = unique_message(name, value);
             break;
         default:
             error.message = message;
@@ -194,6 +223,16 @@ let object_id_message = (attribute) => {
  */
 let required_message = (attribute) => {
     return `'${attribute}' is Required.`;
+};
+
+/**
+ * Returns Unique Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ * @param {String} value Value of the attribute
+ */
+let unique_message = (attribute, value) => {
+    return `${attribute} '${value}' already exists.`;
 };
 
 module.exports = transform_mongoose_error;
