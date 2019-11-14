@@ -16,7 +16,8 @@ var mongoose_error_kinds = {
   MINLENGTH: "minlength",
   NUMBER: "Number",
   OBJECTID: "ObjectID",
-  REQUIRED: "required"
+  REQUIRED: "required",
+  UNIQUE: "unique"
 };
 /**
  * 
@@ -30,15 +31,35 @@ var transform_mongoose_error = function transform_mongoose_error(error, options)
       humanize_option = _parse_options.humanize_option;
 
   var error_messages = [];
-  var attributes = Object.keys(error.errors);
 
   if (error.name === "ValidationError") {
+    var attributes = Object.keys(error.errors);
     attributes.forEach(function (attribute) {
       var kind = error.errors[attribute].kind;
       var value = error.errors[attribute].value;
       var message = error.errors[attribute].message;
       error_messages.push(process_error(kind, attribute, value, message, capitalize_option, humanize_option));
     });
+  } else if (error.name === "MongoError" && (error.code === 11000 || error.code === 11001)) {
+    var message = error.message;
+    /**
+     * Extract attribute
+     */
+
+    var keyRegex = message.match(/index:\s+([^\s]+)/);
+    var rawKey = keyRegex ? keyRegex[1] : '';
+    var attribute = rawKey.substring(0, rawKey.lastIndexOf('_'));
+    /**
+     * Extract value
+     */
+
+    var valueRegex = message.match(/key:\s+{\s+:\s\"(.*)(?=\")/);
+    var value = valueRegex ? valueRegex[1] : '';
+    error_messages.push(process_error(mongoose_error_kinds.UNIQUE, attribute, value, message, capitalize_option, humanize_option));
+  } else if (error.message) {
+    error_messages.push(error.message);
+  } else {
+    error_messages.push(error);
   }
 
   return error_messages;
@@ -109,6 +130,10 @@ var process_error = function process_error(kind, name, value, message, capitaliz
 
     case mongoose_error_kinds.REQUIRED:
       error.message = required_message(name);
+      break;
+
+    case mongoose_error_kinds.UNIQUE:
+      error.message = unique_message(name, value);
       break;
 
     default:
@@ -226,6 +251,17 @@ var object_id_message = function object_id_message(attribute) {
 
 var required_message = function required_message(attribute) {
   return "'".concat(attribute, "' is Required.");
+};
+/**
+ * Returns Unique Related Error Message
+ * 
+ * @param {String} attribute Name of the attribute
+ * @param {String} value Value of the attribute
+ */
+
+
+var unique_message = function unique_message(attribute, value) {
+  return "".concat(attribute, " '").concat(value, "' already exists.");
 };
 
 module.exports = transform_mongoose_error;
