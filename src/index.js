@@ -6,6 +6,7 @@ import { capitalize, humanize, parse_options } from './utils';
 const mongoose_error_kinds = {
     BOOLEAN: "Boolean",
     BUFFER: "Buffer",
+    CASTERROR: "CastError",
     DATE: "Date",
     ENUM: "enum",
     MAX: "max",
@@ -54,6 +55,22 @@ let transform_mongoose_error = (error, options) => {
             let value = valueRegex ? valueRegex[1] : '';
 
             error_messages.push(process_error(mongoose_error_kinds.UNIQUE, attribute, value, message, capitalize_option, humanize_option));
+        }
+        else if (error.name === "CastError") {
+            let path = error.path;
+            let message = error.message;
+
+            if (error.kind === "ObjectId") {
+                /**
+                 * Extract Model
+                 */
+                let modelRegex = message.match(/\"(.*?)\"/g);
+                let model = modelRegex ? modelRegex[modelRegex.length - 1]: '';
+                error_messages.push(process_error(mongoose_error_kinds.CASTERROR, path, model, message, capitalize_option, humanize_option));
+            }
+            else {
+                error_messages.push(message);
+            }
         }
         else if (error.message) {
             error_messages.push(error.message);
@@ -119,6 +136,9 @@ let process_error = (kind, name, value, message, capitalize_option, humanize_opt
         case mongoose_error_kinds.UNIQUE:
             error.message = unique_message(name, value);
             break;
+        case mongoose_error_kinds.CASTERROR:
+            error.message = cast_error_message(name, value);
+            break;
         default:
             error.message = message;
     }
@@ -132,7 +152,7 @@ let process_error = (kind, name, value, message, capitalize_option, humanize_opt
  * @param {String} attribute Name of the attribute
  */
 let boolean_message = (attribute) => {
-    return `'${attribute}' must be a boolean.`;
+    return `"${attribute}" must be a boolean.`;
 };
 
 /**
@@ -141,7 +161,16 @@ let boolean_message = (attribute) => {
  * @param {String} attribute Name of the attribute
  */
 let buffer_message = (attribute) => {
-    return `'${attribute}' must be a buffer.`;
+    return `"${attribute}" must be a buffer.`;
+};
+
+/**
+ * Returns Cast Error Related to Object Id Message
+ * 
+ * @param {String} model Name of the model
+ */
+let cast_error_message = (name, model) => {
+    return `${model} with the provided "${name}" doesn't exist.`;
 };
 
 /**
@@ -150,7 +179,7 @@ let buffer_message = (attribute) => {
  * @param {String} attribute Name of the attribute
  */
 let date_message = (attribute) => {
-    return `'${attribute}' must be a date.`;
+    return `"${attribute}" must be a date.`;
 };
 
 /**
@@ -159,7 +188,7 @@ let date_message = (attribute) => {
  * @param {String} attribute Name of the attribute
  */
 let enum_message = (attribute, value) => {
-    return `'${value}' is an invalid value for the attribute '${attribute}'.`;
+    return `"${value}" is an invalid value for the attribute "${attribute}".`;
 };
 
 /**
@@ -168,7 +197,7 @@ let enum_message = (attribute, value) => {
  * @param {String} attribute Name of the attribute
  */
 let maxlength_message = (attribute) => {
-    return `'${attribute}' is longer than the maximum allowed length.`;
+    return `"${attribute}" is longer than the maximum allowed length.`;
 };
 
 /**
@@ -177,7 +206,7 @@ let maxlength_message = (attribute) => {
  * @param {String} attribute Name of the attribute
  */
 let max_message = (attribute, value) => {
-    return value instanceof Date ? `'${attribute}' is after the maximum allowed date.` : `'${attribute}' is greater than the maximum allowed value.`;
+    return value instanceof Date ? `"${attribute}" is after the maximum allowed date.` : `"${attribute}" is greater than the maximum allowed value.`;
 };
 
 /**
@@ -186,7 +215,7 @@ let max_message = (attribute, value) => {
  * @param {String} attribute Name of the attribute
  */
 let minlength_message = (attribute) => {
-    return `'${attribute}' is shorter than the minimum allowed length.`;
+    return `"${attribute}" is shorter than the minimum allowed length.`;
 };
 
 /**
@@ -195,7 +224,7 @@ let minlength_message = (attribute) => {
  * @param {String} attribute Name of the attribute
  */
 let min_message = (attribute, value) => {
-    return value instanceof Date ? `'${attribute}' is before the minimum allowed date.` : `'${attribute}' is less than the minimum allowed value.`;  
+    return value instanceof Date ? `"${attribute}" is before the minimum allowed date.` : `"${attribute}" is less than the minimum allowed value.`;  
 };
 
 /**
@@ -204,7 +233,7 @@ let min_message = (attribute, value) => {
  * @param {String} attribute Name of the attribute
  */
 let number_message = (attribute) => {
-    return `'${attribute}' must be a number.`;
+    return `"${attribute}" must be a number.`;
 };
 
 /**
@@ -213,7 +242,7 @@ let number_message = (attribute) => {
  * @param {String} attribute Name of the attribute
  */
 let object_id_message = (attribute) => {
-    return `'${attribute}' must be an ObjectId.`;
+    return `"${attribute}" must be an ObjectId.`;
 };
 
 /**
@@ -222,7 +251,7 @@ let object_id_message = (attribute) => {
  * @param {String} attribute Name of the attribute
  */
 let required_message = (attribute) => {
-    return `'${attribute}' is Required.`;
+    return `"${attribute}" is Required.`;
 };
 
 /**
@@ -232,7 +261,7 @@ let required_message = (attribute) => {
  * @param {String} value Value of the attribute
  */
 let unique_message = (attribute, value) => {
-    return `${attribute} '${value}' already exists.`;
+    return `${attribute} "${value}" already exists.`;
 };
 
 module.exports = transform_mongoose_error;

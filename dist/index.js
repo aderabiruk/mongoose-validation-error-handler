@@ -8,6 +8,7 @@ var _utils = require("./utils");
 var mongoose_error_kinds = {
   BOOLEAN: "Boolean",
   BUFFER: "Buffer",
+  CASTERROR: "CastError",
   DATE: "Date",
   ENUM: "enum",
   MAX: "max",
@@ -56,6 +57,21 @@ var transform_mongoose_error = function transform_mongoose_error(error, options)
     var valueRegex = message.match(/key:\s+{\s+:\s\"(.*)(?=\")/);
     var value = valueRegex ? valueRegex[1] : '';
     error_messages.push(process_error(mongoose_error_kinds.UNIQUE, attribute, value, message, capitalize_option, humanize_option));
+  } else if (error.name === "CastError") {
+    var path = error.path;
+    var _message = error.message;
+
+    if (error.kind === "ObjectId") {
+      /**
+       * Extract Model
+       */
+      var modelRegex = _message.match(/\"(.*?)\"/g);
+
+      var model = modelRegex ? modelRegex[modelRegex.length - 1] : '';
+      error_messages.push(process_error(mongoose_error_kinds.CASTERROR, path, model, _message, capitalize_option, humanize_option));
+    } else {
+      error_messages.push(_message);
+    }
   } else if (error.message) {
     error_messages.push(error.message);
   } else {
@@ -136,6 +152,10 @@ var process_error = function process_error(kind, name, value, message, capitaliz
       error.message = unique_message(name, value);
       break;
 
+    case mongoose_error_kinds.CASTERROR:
+      error.message = cast_error_message(name, value);
+      break;
+
     default:
       error.message = message;
   }
@@ -150,7 +170,7 @@ var process_error = function process_error(kind, name, value, message, capitaliz
 
 
 var boolean_message = function boolean_message(attribute) {
-  return "'".concat(attribute, "' must be a boolean.");
+  return "\"".concat(attribute, "\" must be a boolean.");
 };
 /**
  * Returns Buffer Related Error Message
@@ -160,7 +180,17 @@ var boolean_message = function boolean_message(attribute) {
 
 
 var buffer_message = function buffer_message(attribute) {
-  return "'".concat(attribute, "' must be a buffer.");
+  return "\"".concat(attribute, "\" must be a buffer.");
+};
+/**
+ * Returns Cast Error Related to Object Id Message
+ * 
+ * @param {String} model Name of the model
+ */
+
+
+var cast_error_message = function cast_error_message(name, model) {
+  return "".concat(model, " with the provided \"").concat(name, "\" doesn't exist.");
 };
 /**
  * Returns Date Related Error Message
@@ -170,7 +200,7 @@ var buffer_message = function buffer_message(attribute) {
 
 
 var date_message = function date_message(attribute) {
-  return "'".concat(attribute, "' must be a date.");
+  return "\"".concat(attribute, "\" must be a date.");
 };
 /**
  * Returns Enum Related Error Message
@@ -180,7 +210,7 @@ var date_message = function date_message(attribute) {
 
 
 var enum_message = function enum_message(attribute, value) {
-  return "'".concat(value, "' is an invalid value for the attribute '").concat(attribute, "'.");
+  return "\"".concat(value, "\" is an invalid value for the attribute \"").concat(attribute, "\".");
 };
 /**
  * Returns Maxlength Related Error Message
@@ -190,7 +220,7 @@ var enum_message = function enum_message(attribute, value) {
 
 
 var maxlength_message = function maxlength_message(attribute) {
-  return "'".concat(attribute, "' is longer than the maximum allowed length.");
+  return "\"".concat(attribute, "\" is longer than the maximum allowed length.");
 };
 /**
  * Returns Max Related Error Message
@@ -200,7 +230,7 @@ var maxlength_message = function maxlength_message(attribute) {
 
 
 var max_message = function max_message(attribute, value) {
-  return value instanceof Date ? "'".concat(attribute, "' is after the maximum allowed date.") : "'".concat(attribute, "' is greater than the maximum allowed value.");
+  return value instanceof Date ? "\"".concat(attribute, "\" is after the maximum allowed date.") : "\"".concat(attribute, "\" is greater than the maximum allowed value.");
 };
 /**
  * Returns Minlength Related Error Message
@@ -210,7 +240,7 @@ var max_message = function max_message(attribute, value) {
 
 
 var minlength_message = function minlength_message(attribute) {
-  return "'".concat(attribute, "' is shorter than the minimum allowed length.");
+  return "\"".concat(attribute, "\" is shorter than the minimum allowed length.");
 };
 /**
  * Returns Min Related Error Message
@@ -220,7 +250,7 @@ var minlength_message = function minlength_message(attribute) {
 
 
 var min_message = function min_message(attribute, value) {
-  return value instanceof Date ? "'".concat(attribute, "' is before the minimum allowed date.") : "'".concat(attribute, "' is less than the minimum allowed value.");
+  return value instanceof Date ? "\"".concat(attribute, "\" is before the minimum allowed date.") : "\"".concat(attribute, "\" is less than the minimum allowed value.");
 };
 /**
  * Returns Number Related Error Message
@@ -230,7 +260,7 @@ var min_message = function min_message(attribute, value) {
 
 
 var number_message = function number_message(attribute) {
-  return "'".concat(attribute, "' must be a number.");
+  return "\"".concat(attribute, "\" must be a number.");
 };
 /**
  * Returns ObjectId Related Error Message
@@ -240,7 +270,7 @@ var number_message = function number_message(attribute) {
 
 
 var object_id_message = function object_id_message(attribute) {
-  return "'".concat(attribute, "' must be an ObjectId.");
+  return "\"".concat(attribute, "\" must be an ObjectId.");
 };
 /**
  * Returns Required Related Error Message
@@ -250,7 +280,7 @@ var object_id_message = function object_id_message(attribute) {
 
 
 var required_message = function required_message(attribute) {
-  return "'".concat(attribute, "' is Required.");
+  return "\"".concat(attribute, "\" is Required.");
 };
 /**
  * Returns Unique Related Error Message
@@ -261,7 +291,7 @@ var required_message = function required_message(attribute) {
 
 
 var unique_message = function unique_message(attribute, value) {
-  return "".concat(attribute, " '").concat(value, "' already exists.");
+  return "".concat(attribute, " \"").concat(value, "\" already exists.");
 };
 
 module.exports = transform_mongoose_error;

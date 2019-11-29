@@ -36,6 +36,7 @@ model.save((error, savedModel) => {
 |------------------------|---------------|
 | boolean | 'is_active' must be a boolean. |
 | buffer | 'bin_data' must be a buffer. |
+| CastError | 'User' with the provided 'user_id' doesn't exist. |
 | date | 'created_at' must be a date. |
 | enum | 'unknown' is an invalid value for the attribute 'user_type'.|
 | maxlength | 'identifier' is longer than the maximum allowed length. |
