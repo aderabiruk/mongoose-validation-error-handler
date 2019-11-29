@@ -100,11 +100,11 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error);
                 expect(errors_messages.length).toBe(5);
-                expect(errors_messages).toContainEqual({"field": "required_string", "message": "'required_string' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_number", "message": "'required_number' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_date", "message": "'required_date' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_boolean", "message": "'required_boolean' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_buffer", "message": "'required_buffer' is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_string", "message": "\"required_string\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_number", "message": "\"required_number\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_date", "message": "\"required_date\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_boolean", "message": "\"required_boolean\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_buffer", "message": "\"required_buffer\" is Required."});
             }
         });
     
@@ -116,11 +116,11 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
                 expect(errors_messages.length).toBe(5);
-                expect(errors_messages).toContainEqual({"field": "required_string", "message": "'Required_string' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_number", "message": "'Required_number' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_date", "message": "'Required_date' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_boolean", "message": "'Required_boolean' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_buffer", "message": "'Required_buffer' is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_string", "message": "\"Required_string\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_number", "message": "\"Required_number\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_date", "message": "\"Required_date\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_boolean", "message": "\"Required_boolean\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_buffer", "message": "\"Required_buffer\" is Required."});
             }
         });
     
@@ -132,11 +132,11 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
                 expect(errors_messages.length).toBe(5);
-                expect(errors_messages).toContainEqual({"field": "required_string", "message": "'required string' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_number", "message": "'required number' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_date", "message": "'required date' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_boolean", "message": "'required boolean' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_buffer", "message": "'required buffer' is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_string", "message": "\"required string\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_number", "message": "\"required number\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_date", "message": "\"required date\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_boolean", "message": "\"required boolean\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_buffer", "message": "\"required buffer\" is Required."});
             }
         });
     
@@ -148,11 +148,11 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true, capitalize: true});
                 expect(errors_messages.length).toBe(5);
-                expect(errors_messages).toContainEqual({"field": "required_string", "message": "'Required string' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_number", "message": "'Required number' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_date", "message": "'Required date' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_boolean", "message": "'Required boolean' is Required."});
-                expect(errors_messages).toContainEqual({"field": "required_buffer", "message": "'Required buffer' is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_string", "message": "\"Required string\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_number", "message": "\"Required number\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_date", "message": "\"Required date\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_boolean", "message": "\"Required boolean\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "required_buffer", "message": "\"Required buffer\" is Required."});
             }
         });
     });
@@ -173,7 +173,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error);
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "minlength_string", "message": "'minlength_string' is shorter than the minimum allowed length."});
+                expect(errors_messages).toContainEqual({"field": "minlength_string", "message": "\"minlength_string\" is shorter than the minimum allowed length."});
             }
         });
     
@@ -185,7 +185,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "minlength_string", "message": "'Minlength_string' is shorter than the minimum allowed length."});            
+                expect(errors_messages).toContainEqual({"field": "minlength_string", "message": "\"Minlength_string\" is shorter than the minimum allowed length."});            
             }
         });
     
@@ -197,7 +197,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "minlength_string", "message": "'minlength string' is shorter than the minimum allowed length."});            
+                expect(errors_messages).toContainEqual({"field": "minlength_string", "message": "\"minlength string\" is shorter than the minimum allowed length."});            
             }
         });
     
@@ -209,7 +209,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "minlength_string", "message": "'Minlength string' is shorter than the minimum allowed length."});            
+                expect(errors_messages).toContainEqual({"field": "minlength_string", "message": "\"Minlength string\" is shorter than the minimum allowed length."});            
             }
         });
     });
@@ -230,7 +230,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error);
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "maxlength_string", "message": "'maxlength_string' is longer than the maximum allowed length."});
+                expect(errors_messages).toContainEqual({"field": "maxlength_string", "message": "\"maxlength_string\" is longer than the maximum allowed length."});
             }
         });
     
@@ -242,7 +242,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "maxlength_string", "message": "'Maxlength_string' is longer than the maximum allowed length."});
+                expect(errors_messages).toContainEqual({"field": "maxlength_string", "message": "\"Maxlength_string\" is longer than the maximum allowed length."});
             }
         });
     
@@ -254,7 +254,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "maxlength_string", "message": "'maxlength string' is longer than the maximum allowed length."});
+                expect(errors_messages).toContainEqual({"field": "maxlength_string", "message": "\"maxlength string\" is longer than the maximum allowed length."});
             }
         });
     
@@ -266,7 +266,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "maxlength_string", "message": "'Maxlength string' is longer than the maximum allowed length."});
+                expect(errors_messages).toContainEqual({"field": "maxlength_string", "message": "\"Maxlength string\" is longer than the maximum allowed length."});
             }
         });
     });
@@ -288,7 +288,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error);
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "min_number", "message": "'min_number' is less than the minimum allowed value."});
+                    expect(errors_messages).toContainEqual({"field": "min_number", "message": "\"min_number\" is less than the minimum allowed value."});
                 }
             });
 
@@ -300,7 +300,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {capitalize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "min_number", "message": "'Min_number' is less than the minimum allowed value."});
+                    expect(errors_messages).toContainEqual({"field": "min_number", "message": "\"Min_number\" is less than the minimum allowed value."});
                 }
             });
 
@@ -312,7 +312,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {humanize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "min_number", "message": "'min number' is less than the minimum allowed value."});
+                    expect(errors_messages).toContainEqual({"field": "min_number", "message": "\"min number\" is less than the minimum allowed value."});
                 }
             });
 
@@ -324,7 +324,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "min_number", "message": "'Min number' is less than the minimum allowed value."});
+                    expect(errors_messages).toContainEqual({"field": "min_number", "message": "\"Min number\" is less than the minimum allowed value."});
                 }
             });
         });
@@ -332,7 +332,7 @@ describe("MongooseValidationErrorHandler", () => {
         describe("30 Days Earlier", () => {
             beforeAll(() => {
                 model = new MinMaxModel();
-                model.min_date = moment().subtract(31, 'days');
+                model.min_date = moment().subtract(31, "days");
             });
     
             it("capitalize: false, humanize: false", async () => {
@@ -343,7 +343,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error);
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "min_date", "message": "'min_date' is before the minimum allowed date."});
+                    expect(errors_messages).toContainEqual({"field": "min_date", "message": "\"min_date\" is before the minimum allowed date."});
                 }
             });
 
@@ -355,7 +355,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {capitalize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "min_date", "message": "'Min_date' is before the minimum allowed date."});
+                    expect(errors_messages).toContainEqual({"field": "min_date", "message": "\"Min_date\" is before the minimum allowed date."});
                 }
             });
 
@@ -367,7 +367,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {humanize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "min_date", "message": "'min date' is before the minimum allowed date."});
+                    expect(errors_messages).toContainEqual({"field": "min_date", "message": "\"min date\" is before the minimum allowed date."});
                 }
             });
 
@@ -379,7 +379,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {humanize: true, capitalize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "min_date", "message": "'Min date' is before the minimum allowed date."});
+                    expect(errors_messages).toContainEqual({"field": "min_date", "message": "\"Min date\" is before the minimum allowed date."});
                 }
             });
         })
@@ -402,7 +402,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error);
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "max_number", "message": "'max_number' is greater than the maximum allowed value."});
+                    expect(errors_messages).toContainEqual({"field": "max_number", "message": "\"max_number\" is greater than the maximum allowed value."});
                 }
             });
 
@@ -414,7 +414,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {capitalize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "max_number", "message": "'Max_number' is greater than the maximum allowed value."});
+                    expect(errors_messages).toContainEqual({"field": "max_number", "message": "\"Max_number\" is greater than the maximum allowed value."});
                 }
             });
 
@@ -426,7 +426,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {humanize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "max_number", "message": "'max number' is greater than the maximum allowed value."});
+                    expect(errors_messages).toContainEqual({"field": "max_number", "message": "\"max number\" is greater than the maximum allowed value."});
                 }
             });
 
@@ -438,7 +438,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "max_number", "message": "'Max number' is greater than the maximum allowed value."});
+                    expect(errors_messages).toContainEqual({"field": "max_number", "message": "\"Max number\" is greater than the maximum allowed value."});
                 }
             });
         });
@@ -446,7 +446,7 @@ describe("MongooseValidationErrorHandler", () => {
         describe("30 Days Later", () => {
             beforeAll(() => {
                 model = new MinMaxModel();
-                model.max_date = moment().add(31, 'days');
+                model.max_date = moment().add(31, "days");
             });
     
             it("capitalize: false, humanize: false", async () => {
@@ -457,7 +457,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error);
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "max_date", "message": "'max_date' is after the maximum allowed date."});
+                    expect(errors_messages).toContainEqual({"field": "max_date", "message": "\"max_date\" is after the maximum allowed date."});
                 }
             });
 
@@ -469,7 +469,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {capitalize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "max_date", "message": "'Max_date' is after the maximum allowed date."});
+                    expect(errors_messages).toContainEqual({"field": "max_date", "message": "\"Max_date\" is after the maximum allowed date."});
                 }
             });
 
@@ -481,7 +481,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {humanize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "max_date", "message": "'max date' is after the maximum allowed date."});
+                    expect(errors_messages).toContainEqual({"field": "max_date", "message": "\"max date\" is after the maximum allowed date."});
                 }
             });
 
@@ -493,7 +493,7 @@ describe("MongooseValidationErrorHandler", () => {
                 catch (error) {
                     let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                     expect(errors_messages.length).toBe(1);
-                    expect(errors_messages).toContainEqual({"field": "max_date", "message": "'Max date' is after the maximum allowed date."});
+                    expect(errors_messages).toContainEqual({"field": "max_date", "message": "\"Max date\" is after the maximum allowed date."});
                 }
             });
 
@@ -516,7 +516,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_boolean", "message": "'type_boolean' must be a boolean."});
+                expect(errors_messages).toContainEqual({"field": "type_boolean", "message": "\"type_boolean\" must be a boolean."});
             }
         });
 
@@ -528,7 +528,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_boolean", "message": "'Type_boolean' must be a boolean."});
+                expect(errors_messages).toContainEqual({"field": "type_boolean", "message": "\"Type_boolean\" must be a boolean."});
             }
         });
 
@@ -540,7 +540,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_boolean", "message": "'type boolean' must be a boolean."});
+                expect(errors_messages).toContainEqual({"field": "type_boolean", "message": "\"type boolean\" must be a boolean."});
             }
         });
 
@@ -552,7 +552,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_boolean", "message": "'Type boolean' must be a boolean."});
+                expect(errors_messages).toContainEqual({"field": "type_boolean", "message": "\"Type boolean\" must be a boolean."});
             }
         });
     });
@@ -573,7 +573,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_buffer", "message": "'type_buffer' must be a buffer."});
+                expect(errors_messages).toContainEqual({"field": "type_buffer", "message": "\"type_buffer\" must be a buffer."});
             }
         });
 
@@ -585,7 +585,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_buffer", "message": "'Type_buffer' must be a buffer."});
+                expect(errors_messages).toContainEqual({"field": "type_buffer", "message": "\"Type_buffer\" must be a buffer."});
             }
         });
 
@@ -597,7 +597,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_buffer", "message": "'type buffer' must be a buffer."});
+                expect(errors_messages).toContainEqual({"field": "type_buffer", "message": "\"type buffer\" must be a buffer."});
             }
         });
 
@@ -609,7 +609,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_buffer", "message": "'Type buffer' must be a buffer."});
+                expect(errors_messages).toContainEqual({"field": "type_buffer", "message": "\"Type buffer\" must be a buffer."});
             }
         });
     });
@@ -630,7 +630,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_date", "message": "'type_date' must be a date."});
+                expect(errors_messages).toContainEqual({"field": "type_date", "message": "\"type_date\" must be a date."});
             }
         });
 
@@ -642,7 +642,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_date", "message": "'Type_date' must be a date."});
+                expect(errors_messages).toContainEqual({"field": "type_date", "message": "\"Type_date\" must be a date."});
             }
         });
 
@@ -654,7 +654,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_date", "message": "'type date' must be a date."});
+                expect(errors_messages).toContainEqual({"field": "type_date", "message": "\"type date\" must be a date."});
             }
         });
 
@@ -666,7 +666,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_date", "message": "'Type date' must be a date."});
+                expect(errors_messages).toContainEqual({"field": "type_date", "message": "\"Type date\" must be a date."});
             }
         });
     });
@@ -687,7 +687,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_string_enum", "message": "'D' is an invalid value for the attribute 'type_string_enum'."});
+                expect(errors_messages).toContainEqual({"field": "type_string_enum", "message": "\"D\" is an invalid value for the attribute \"type_string_enum\"."});
             }
         });
 
@@ -699,7 +699,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_string_enum", "message": "'D' is an invalid value for the attribute 'Type_string_enum'."});
+                expect(errors_messages).toContainEqual({"field": "type_string_enum", "message": "\"D\" is an invalid value for the attribute \"Type_string_enum\"."});
             }
         });
 
@@ -711,7 +711,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_string_enum", "message": "'D' is an invalid value for the attribute 'type string enum'."});
+                expect(errors_messages).toContainEqual({"field": "type_string_enum", "message": "\"D\" is an invalid value for the attribute \"type string enum\"."});
             }
         });
 
@@ -723,7 +723,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_string_enum", "message": "'D' is an invalid value for the attribute 'Type string enum'."});
+                expect(errors_messages).toContainEqual({"field": "type_string_enum", "message": "\"D\" is an invalid value for the attribute \"Type string enum\"."});
             }
         });
     });
@@ -744,7 +744,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_number", "message": "'type_number' must be a number."});
+                expect(errors_messages).toContainEqual({"field": "type_number", "message": "\"type_number\" must be a number."});
             }
         });
 
@@ -756,7 +756,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_number", "message": "'Type_number' must be a number."});
+                expect(errors_messages).toContainEqual({"field": "type_number", "message": "\"Type_number\" must be a number."});
             }
         });
 
@@ -768,7 +768,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_number", "message": "'type number' must be a number."});
+                expect(errors_messages).toContainEqual({"field": "type_number", "message": "\"type number\" must be a number."});
             }
         });
 
@@ -780,7 +780,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_number", "message": "'Type number' must be a number."});
+                expect(errors_messages).toContainEqual({"field": "type_number", "message": "\"Type number\" must be a number."});
             }
         });        
     });
@@ -801,7 +801,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_object_id", "message": "'type_object_id' must be an ObjectId."});
+                expect(errors_messages).toContainEqual({"field": "type_object_id", "message": "\"type_object_id\" must be an ObjectId."});
             }
         });
 
@@ -813,7 +813,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_object_id", "message": "'Type_object_id' must be an ObjectId."});
+                expect(errors_messages).toContainEqual({"field": "type_object_id", "message": "\"Type_object_id\" must be an ObjectId."});
             }
         });
 
@@ -825,7 +825,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_object_id", "message": "'type object id' must be an ObjectId."});
+                expect(errors_messages).toContainEqual({"field": "type_object_id", "message": "\"type object id\" must be an ObjectId."});
             }
         });
 
@@ -837,7 +837,7 @@ describe("MongooseValidationErrorHandler", () => {
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                 expect(errors_messages.length).toBe(1);
-                expect(errors_messages).toContainEqual({"field": "type_object_id", "message": "'Type object id' must be an ObjectId."});
+                expect(errors_messages).toContainEqual({"field": "type_object_id", "message": "\"Type object id\" must be an ObjectId."});
             }
         });
     });
@@ -889,7 +889,7 @@ describe("MongooseValidationErrorHandler", () => {
             }
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {});
-                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "unique_attribute_1 'unique1@unique.com' already exists."});
+                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "unique_attribute_1 \"unique1@unique.com\" already exists."});
             }
 
         });
@@ -902,7 +902,7 @@ describe("MongooseValidationErrorHandler", () => {
             }
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
-                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "Unique_attribute_1 'unique1@unique.com' already exists."});
+                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "Unique_attribute_1 \"unique1@unique.com\" already exists."});
             }
 
         });
@@ -915,7 +915,7 @@ describe("MongooseValidationErrorHandler", () => {
             }
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
-                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "unique attribute 1 'unique1@unique.com' already exists."});
+                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "unique attribute 1 \"unique1@unique.com\" already exists."});
             }
         });
 
@@ -927,7 +927,7 @@ describe("MongooseValidationErrorHandler", () => {
             }
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
-                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "Unique attribute 1 'unique1@unique.com' already exists."});
+                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "Unique attribute 1 \"unique1@unique.com\" already exists."});
             }
 
         });
@@ -938,5 +938,56 @@ describe("MongooseValidationErrorHandler", () => {
             mongoose.connection.close();
         });
     })
+
+
+    describe("CastError", () => {
+        it("capitalize: false, humanize: false", async () => {
+            try {
+                let response = await RequiredModel.find({_id: "INVALID-ID"});
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, {});
+                expect(errors_messages.length).toBe(1);
+                expect(errors_messages).toContainEqual({"field": "_id", "message": "\"RequiredModel\" with the provided \"_id\" doesn't exist."});
+            }
+        });
+
+        it("capitalize: true, humanize: false", async () => {
+            try {
+                let response = await RequiredModel.find({_id: "INVALID-ID"});
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, {capitalize: true});
+                expect(errors_messages.length).toBe(1);
+                expect(errors_messages).toContainEqual({"field": "_id", "message": "\"RequiredModel\" with the provided \"_id\" doesn't exist."});
+            }
+        });
+
+        it("capitalize: false, humanize: true", async () => {
+            try {
+                let response = await RequiredModel.find({_id: "INVALID-ID"});
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, {humanize: true});
+                expect(errors_messages.length).toBe(1);
+                expect(errors_messages).toContainEqual({"field": "_id", "message": "\"RequiredModel\" with the provided \"id\" doesn't exist."});
+            }
+        });
+
+        it("capitalize: true, humanize: true", async () => {
+            try {
+                let response = await RequiredModel.find({_id: "INVALID-ID"});
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
+                expect(errors_messages.length).toBe(1);
+                expect(errors_messages).toContainEqual({"field": "_id", "message": "\"RequiredModel\" with the provided \"id\" doesn't exist."});
+            }
+        });
+    });
 
 });
