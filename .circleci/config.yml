@@ -1,0 +1,60 @@
+version: 2.1
+jobs:
+    build:
+        docker:
+            - image: circleci/node:10.16.3
+            - image: mongo
+        steps:
+            - checkout
+            - restore_cache:
+                key: dependency-cache-{{ checksum "package-lock.json" }}
+            - run: 
+                name: "Install NPM Modules"
+                command: npm install
+            - save_cache:
+                key: dependency-cache-{{ checksum "package-lock.json" }}
+                paths:
+                    - ./node_modules
+            - run: 
+                name: "Build"
+                command: npm run build
+    test:
+        docker:
+            - image: circleci/node:10.16.3
+            - image: mongo
+        steps:
+            - checkout
+            - restore_cache:
+                key: dependency-cache-{{ checksum "package-lock.json" }}
+            - run: 
+                name: "Install NPM Modules"
+                command: npm install
+            - save_cache:
+                key: dependency-cache-{{ checksum "package-lock.json" }}
+                paths:
+                    - ./node_modules
+            - run: 
+                name: "Build"
+                command: npm run build
+            - run: 
+                name: "Test"
+                environment:
+                    MONGODB_URI: mongodb://mongo:27017/mongoose-validation-error-handler
+                command: npm test
+workflows:
+    mongoose-validation-error-handler:
+        jobs:
+            - build:
+                filters:
+                    branches:
+                        only:
+                            - develop
+                            - master
+            - test:
+                filters:
+                    branches:
+                        only:
+                            - develop
+                            - master
+                requires:
+                    - build
