@@ -40,7 +40,7 @@ let transform_mongoose_error = (error, options) => {
         } 
         else if (error.name === "MongoError" && (error.code === 11000 || error.code === 11001)) {
             let message = error.message;
-
+            
             /**
              * Extract attribute
              */
@@ -51,10 +51,7 @@ let transform_mongoose_error = (error, options) => {
             /**
              * Extract value
              */
-            let valueRegex = message.match(/key:\s+{\s+:\s\"(.*)(?=\")/);
-            let value = valueRegex ? valueRegex[1] : '';
-
-            error_messages.push(process_error(mongoose_error_kinds.UNIQUE, attribute, value, message, capitalize_option, humanize_option));
+            error_messages.push(process_error(mongoose_error_kinds.UNIQUE, attribute, null, message, capitalize_option, humanize_option));
         }
         else if (error.name === "CastError") {
             let path = error.path;
@@ -261,7 +258,7 @@ let required_message = (attribute) => {
  * @param {String} value Value of the attribute
  */
 let unique_message = (attribute, value) => {
-    return `${attribute} "${value}" already exists.`;
+    return `${attribute} already exists.`;
 };
 
 module.exports = transform_mongoose_error;

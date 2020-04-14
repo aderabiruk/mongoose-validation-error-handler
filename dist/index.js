@@ -54,9 +54,7 @@ var transform_mongoose_error = function transform_mongoose_error(error, options)
      * Extract value
      */
 
-    var valueRegex = message.match(/key:\s+{\s+:\s\"(.*)(?=\")/);
-    var value = valueRegex ? valueRegex[1] : '';
-    error_messages.push(process_error(mongoose_error_kinds.UNIQUE, attribute, value, message, capitalize_option, humanize_option));
+    error_messages.push(process_error(mongoose_error_kinds.UNIQUE, attribute, null, message, capitalize_option, humanize_option));
   } else if (error.name === "CastError") {
     var path = error.path;
     var _message = error.message;
@@ -291,7 +289,7 @@ var required_message = function required_message(attribute) {
 
 
 var unique_message = function unique_message(attribute, value) {
-  return "".concat(attribute, " \"").concat(value, "\" already exists.");
+  return "".concat(attribute, " already exists.");
 };
 
 module.exports = transform_mongoose_error;

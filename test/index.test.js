@@ -873,7 +873,7 @@ describe("MongooseValidationErrorHandler", () => {
 
     describe("unique", () => {
         beforeAll(async () => {
-            let dbUrl = "mongodb://localhost:27017/mongoose-validation-error-handler";
+            let dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/mongoose-validation-error-handler";
             await mongoose.connect(dbUrl, {useUnifiedTopology: true, useNewUrlParser: true});
 
             let model = new UniqueModel();
@@ -889,7 +889,7 @@ describe("MongooseValidationErrorHandler", () => {
             }
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {});
-                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "unique_attribute_1 \"unique1@unique.com\" already exists."});
+                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "unique_attribute_1 already exists."});
             }
 
         });
@@ -902,7 +902,7 @@ describe("MongooseValidationErrorHandler", () => {
             }
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true});
-                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "Unique_attribute_1 \"unique1@unique.com\" already exists."});
+                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "Unique_attribute_1 already exists."});
             }
 
         });
@@ -915,7 +915,7 @@ describe("MongooseValidationErrorHandler", () => {
             }
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {humanize: true});
-                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "unique attribute 1 \"unique1@unique.com\" already exists."});
+                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "unique attribute 1 already exists."});
             }
         });
 
@@ -927,7 +927,7 @@ describe("MongooseValidationErrorHandler", () => {
             }
             catch (error) {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
-                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "Unique attribute 1 \"unique1@unique.com\" already exists."});
+                expect(errors_messages).toContainEqual({"field": "unique_attribute_1", "message": "Unique attribute 1 already exists."});
             }
 
         });
@@ -935,6 +935,7 @@ describe("MongooseValidationErrorHandler", () => {
 
         afterAll(async () => {
             await UniqueModel.deleteMany({});
+            await mongoose.connection.dropCollection("unique");
             mongoose.connection.close();
         });
     })
@@ -988,6 +989,10 @@ describe("MongooseValidationErrorHandler", () => {
                 expect(errors_messages).toContainEqual({"field": "_id", "message": "\"RequiredModel\" with the provided \"id\" doesn't exist."});
             }
         });
+    });
+
+    afterAll(async () => {
+        await mongoose.connection.close();
     });
 
 });
