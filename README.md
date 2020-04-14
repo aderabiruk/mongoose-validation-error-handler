@@ -1,4 +1,5 @@
 # Mongoose Validation Error Handler
+[![Known Vulnerabilities](https://snyk.io/test/github/aderabiruk/mongoose-validation-error-handler/badge.svg?targetFile=package.json)](https://snyk.io/test/github/aderabiruk/mongoose-validation-error-handler?targetFile=package.json)
 mongoose-validation-error-handler is responsilbe for processing and transfroming mongoose validation error(s) into a readable format.
 
 ## Index
