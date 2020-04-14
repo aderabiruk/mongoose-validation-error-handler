@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel src --out-dir dist",
     "lint": "eslint src test",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [
     "mongo",
@@ -23,7 +24,8 @@
   "author": "Biruk Adera",
   "license": "ISC",
   "jest": {
-    "verbose": true
+    "verbose": true,
+    "collectCoverage": true
   },
   "repository": {
     "type": "git",
