@@ -59,7 +59,7 @@ var transform_mongoose_error = function transform_mongoose_error(error, options)
     var path = error.path;
     var _message = error.message;
 
-    if (error.kind === "ObjectId") {
+    if (error.kind === "ObjectId" || error.kind === undefined) {
       /**
        * Extract Model
        */

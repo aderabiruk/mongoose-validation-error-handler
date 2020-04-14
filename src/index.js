@@ -57,7 +57,7 @@ let transform_mongoose_error = (error, options) => {
             let path = error.path;
             let message = error.message;
 
-            if (error.kind === "ObjectId") {
+            if (error.kind === "ObjectId" || error.kind === undefined) {
                 /**
                  * Extract Model
                  */

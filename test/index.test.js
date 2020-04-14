@@ -873,7 +873,7 @@ describe("MongooseValidationErrorHandler", () => {
 
     describe("unique", () => {
         beforeAll(async () => {
-            let dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/mongoose-validation-error-handler";
+            let dbUrl = "mongodb://localhost:27017/mongoose-validation-error-handler";
             await mongoose.connect(dbUrl, {useUnifiedTopology: true, useNewUrlParser: true});
 
             let model = new UniqueModel();
@@ -935,6 +935,7 @@ describe("MongooseValidationErrorHandler", () => {
 
         afterAll(async () => {
             await UniqueModel.deleteMany({});
+            mongoose.connection.close();
         });
     })
 
@@ -942,7 +943,7 @@ describe("MongooseValidationErrorHandler", () => {
     describe("CastError", () => {
         it("capitalize: false, humanize: false", async () => {
             try {
-                let response = await RequiredModel.find({_id: "INVALID-ID"});
+                let response = await RequiredModel.findById({_id: "INVALID-ID"});
                 fail();
             }
             catch (error) {
@@ -987,10 +988,6 @@ describe("MongooseValidationErrorHandler", () => {
                 expect(errors_messages).toContainEqual({"field": "_id", "message": "\"RequiredModel\" with the provided \"id\" doesn't exist."});
             }
         });
-    });
-
-    afterAll(async () => {
-        await mongoose.connection.close();
     });
 
 });
