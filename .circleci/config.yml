@@ -38,8 +38,6 @@ jobs:
                 command: npm run build
             - run: 
                 name: "Test"
-                environment:
-                    MONGODB_URI: mongodb://mongo:27017/mongoose-validation-error-handler
                 command: npm test
 workflows:
     mongoose-validation-error-handler:
