@@ -935,8 +935,6 @@ describe("MongooseValidationErrorHandler", () => {
 
         afterAll(async () => {
             await UniqueModel.deleteMany({});
-            await mongoose.connection.dropCollection("unique");
-            mongoose.connection.close();
         });
     })
 
