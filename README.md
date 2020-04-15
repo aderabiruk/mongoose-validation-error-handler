@@ -2,8 +2,10 @@
 
 [![CircleCI](https://circleci.com/gh/aderabiruk/mongoose-validation-error-handler.svg?style=svg)](https://circleci.com/gh/aderabiruk/mongoose-validation-error-handler)
 [![Known Vulnerabilities](https://snyk.io/test/github/aderabiruk/mongoose-validation-error-handler/badge.svg?targetFile=package.json)](https://snyk.io/test/github/aderabiruk/mongoose-validation-error-handler?targetFile=package.json)
+[![codecov](https://codecov.io/gh/aderabiruk/mongoose-validation-error-handler/branch/master/graph/badge.svg)](https://codecov.io/gh/aderabiruk/mongoose-validation-error-handler)
 [![HitCount](http://hits.dwyl.com/aderabiruk/mongoose-validation-error-handler.svg)](http://hits.dwyl.com/aderabiruk/mongoose-validation-error-handler)
 [![npm version](https://badge.fury.io/js/mongoose-validation-error-handler.svg)](https://badge.fury.io/js/mongoose-validation-error-handler)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/aderabiruk/mongoose-validation-error-handler)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/aderabiruk/mongoose-validation-error-handler/issues)
 
 mongoose-validation-error-handler is responsilbe for processing and transfroming mongoose validation error(s) into a readable format.
