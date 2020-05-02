@@ -937,8 +937,7 @@ describe("MongooseValidationErrorHandler", () => {
             await UniqueModel.deleteMany({});
             mongoose.connection.close();
         });
-    })
-
+    });
 
     describe("CastError", () => {
         it("capitalize: false, humanize: false", async () => {
