@@ -119,4 +119,4 @@ var process_error = function (kind, name, value, message, capitalize_option, hum
     }
     return error;
 };
-module.exports = transform_mongoose_error;
+exports.default = transform_mongoose_error;

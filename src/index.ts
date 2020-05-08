@@ -136,4 +136,4 @@ let process_error = (kind: string, name: string, value: string, message: string,
     return error;
 };
 
-module.exports = transform_mongoose_error;
+export default transform_mongoose_error;
