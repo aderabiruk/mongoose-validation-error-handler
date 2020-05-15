@@ -32,3 +32,24 @@ export const capitalize = (text: string): string => {
 export const humanize = (text: string): string => {
     return text.split("_").join(" ").trim();
 };
+
+/**
+ * Clean Field Name
+ * 
+ * @param {string} Field
+ * @returns {string}
+ */
+export const cleanField = (field: string): string => {
+    let splitted_array = field.split(".");
+    return splitted_array.filter((value) => !isNumber(value)).join(".");
+};
+
+/**
+ * Check if String is Number
+ * 
+ * @param {string} value
+ * @returns {boolean}
+ */
+export const isNumber = (value: string): boolean => {
+    return !/\D/.test(value);
+}

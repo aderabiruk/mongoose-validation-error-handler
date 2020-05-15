@@ -71,6 +71,7 @@ var transform_mongoose_error = function (error, options) {
  * @returns {object} Error Message Object
  */
 var process_error = function (kind, name, value, message, capitalize_option, humanize_option) {
+    name = utils_1.cleanField(name);
     var error = new type_1.ErrorMessage(name);
     name = capitalize_option ? utils_1.capitalize(name) : name;
     name = humanize_option ? utils_1.humanize(name) : name;

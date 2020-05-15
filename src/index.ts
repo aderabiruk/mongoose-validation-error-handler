@@ -1,5 +1,5 @@
 import { ErrorMessage, mongoose_error_kinds } from './type';
-import { capitalize, humanize, parse_options } from './utils';
+import { capitalize, humanize, parse_options, cleanField } from './utils';
 import {
     boolean_message, buffer_message,
     cast_error_message, date_message,
@@ -84,6 +84,7 @@ let transform_mongoose_error = (error: any, options: any) => {
  * @returns {object} Error Message Object
  */
 let process_error = (kind: string, name: string, value: string, message: string, capitalize_option: boolean, humanize_option: boolean) => {
+    name = cleanField(name);
     let error: ErrorMessage = new ErrorMessage(name);
 
     name = capitalize_option ? capitalize(name) : name;

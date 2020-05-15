@@ -19,7 +19,7 @@ exports.mongoose_error_kinds = {
     UNIQUE: "unique"
 };
 /**
- *
+ * Error Message Object
  */
 var ErrorMessage = /** @class */ (function () {
     function ErrorMessage(field, message) {
