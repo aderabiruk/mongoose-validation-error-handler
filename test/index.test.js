@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import regeneratorRuntime from "regenerator-runtime";
 
 import TypeModel from './TypeModel';
+import ArrayModel from './ArrayModel';
 import MinMaxModel from "./MinMaxModel";
 import UniqueModel from './UniqueModel';
 import RequiredModel from './RequiredModel';
@@ -10,7 +11,7 @@ import MinMaxLengthModel from './MinMaxLengthModel';
 import UserDefinedValidationModel from './UserDefinedValidationModel';
 
 import transform_mongoose_error from '../dist/index';
-import { capitalize, humanize, parse_options } from '../src/utils';
+import { capitalize, humanize, parse_options } from '../dist/utils';
 
 describe("MongooseValidationErrorHandler", () => {
 
@@ -985,6 +986,124 @@ describe("MongooseValidationErrorHandler", () => {
                 let errors_messages = transform_mongoose_error(error, {capitalize: true, humanize: true});
                 expect(errors_messages.length).toBe(1);
                 expect(errors_messages).toContainEqual({"field": "_id", "message": "\"RequiredModel\" with the provided \"id\" doesn't exist."});
+            }
+        });
+    });
+
+    describe("array", () => {
+        it("capitalize: false, humanize: false", async () => {
+            try {
+                let model = new ArrayModel();
+                model.array_items = [{}]
+                await model.save();
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, {});
+                expect(errors_messages.length).toBe(2);
+                expect(errors_messages).toContainEqual({"field": "array_items.quantity", "message": "\"array_items.quantity\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "array_items.product", "message": "\"array_items.product\" is Required."});
+            }
+        });
+
+        it("capitalize: false, humanize: false", async () => {
+            try {
+                let model = new ArrayModel();
+                model.array_items = [{ product: "Product"}]
+                await model.save();
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, {});
+                expect(errors_messages.length).toBe(1);
+                expect(errors_messages).toContainEqual({"field": "array_items.quantity", "message": "\"array_items.quantity\" is Required."});
+            }
+        });
+
+        it("capitalize: true, humanize: false", async () => {
+            try {
+                let model = new ArrayModel();
+                model.array_items = [{}]
+                await model.save();
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, { capitalize: true });
+                expect(errors_messages.length).toBe(2);
+                expect(errors_messages).toContainEqual({"field": "array_items.quantity", "message": "\"Array_items.quantity\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "array_items.product", "message": "\"Array_items.product\" is Required."});
+            }
+        });
+
+        it("capitalize: true, humanize: false", async () => {
+            try {
+                let model = new ArrayModel();
+                model.array_items = [{ product: "Product"}]
+                await model.save();
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, { capitalize: true });
+                expect(errors_messages.length).toBe(1);
+                expect(errors_messages).toContainEqual({"field": "array_items.quantity", "message": "\"Array_items.quantity\" is Required."});
+            }
+        });
+
+        it("capitalize: false, humanize: true", async () => {
+            try {
+                let model = new ArrayModel();
+                model.array_items = [{}]
+                await model.save();
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, { humanize: true });
+                expect(errors_messages.length).toBe(2);
+                expect(errors_messages).toContainEqual({"field": "array_items.quantity", "message": "\"array items.quantity\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "array_items.product", "message": "\"array items.product\" is Required."});
+            }
+        });
+
+        it("capitalize: false, humanize: true", async () => {
+            try {
+                let model = new ArrayModel();
+                model.array_items = [{ product: "Product"}]
+                await model.save();
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, { humanize: true });
+                expect(errors_messages.length).toBe(1);
+                expect(errors_messages).toContainEqual({"field": "array_items.quantity", "message": "\"array items.quantity\" is Required."});
+            }
+        });
+
+        it("capitalize: true, humanize: true", async () => {
+            try {
+                let model = new ArrayModel();
+                model.array_items = [{}]
+                await model.save();
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, { capitalize: true, humanize: true });
+                expect(errors_messages.length).toBe(2);
+                expect(errors_messages).toContainEqual({"field": "array_items.quantity", "message": "\"Array items.quantity\" is Required."});
+                expect(errors_messages).toContainEqual({"field": "array_items.product", "message": "\"Array items.product\" is Required."});
+            }
+        });
+
+        it("capitalize: true, humanize: true", async () => {
+            try {
+                let model = new ArrayModel();
+                model.array_items = [{ product: "Product"}]
+                await model.save();
+                fail();
+            }
+            catch (error) {
+                let errors_messages = transform_mongoose_error(error, { capitalize: true, humanize: true });
+                expect(errors_messages.length).toBe(1);
+                expect(errors_messages).toContainEqual({"field": "array_items.quantity", "message": "\"Array items.quantity\" is Required."});
             }
         });
     });
