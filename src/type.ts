@@ -1,3 +1,5 @@
+import { cleanField } from "./utils";
+
 /**
  * Mongoose Error Kinds
  */
@@ -18,7 +20,7 @@ export const mongoose_error_kinds = {
 };
 
 /**
- * 
+ * Error Message Object
  */
 export class ErrorMessage {
     public field: string;
@@ -28,4 +30,5 @@ export class ErrorMessage {
         this.field = field;
         this.message = message;
     }
+
 }
