@@ -24,3 +24,17 @@ export declare const capitalize: (text: string) => string;
  * @returns {string}
  */
 export declare const humanize: (text: string) => string;
+/**
+ * Clean Field Name
+ *
+ * @param {string} Field
+ * @returns {string}
+ */
+export declare const cleanField: (field: string) => string;
+/**
+ * Check if String is Number
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+export declare const isNumber: (value: string) => boolean;

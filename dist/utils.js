@@ -32,3 +32,22 @@ exports.capitalize = function (text) {
 exports.humanize = function (text) {
     return text.split("_").join(" ").trim();
 };
+/**
+ * Clean Field Name
+ *
+ * @param {string} Field
+ * @returns {string}
+ */
+exports.cleanField = function (field) {
+    var splitted_array = field.split(".");
+    return splitted_array.filter(function (value) { return !exports.isNumber(value); }).join(".");
+};
+/**
+ * Check if String is Number
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+exports.isNumber = function (value) {
+    return !/\D/.test(value);
+};

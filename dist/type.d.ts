@@ -17,7 +17,7 @@ export declare const mongoose_error_kinds: {
     UNIQUE: string;
 };
 /**
- *
+ * Error Message Object
  */
 export declare class ErrorMessage {
     field: string;
